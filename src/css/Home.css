@@ -1,0 +1,77 @@
+
+
+.homePageWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    height: 100vh;
+}
+
+.formWrapper{
+    background-color: #282a36;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+
+.inputgroup{
+    display: flex;
+    flex-direction: column;
+}
+
+.mainlavel{
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.logo{
+    height: 80px;
+    margin-bottom: 30px;
+}
+.inputbox{
+    padding: 10px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    margin-bottom: 12px;
+    background: #eee;
+    font-size: 16px;
+    font-weight: bold;
+    color: #282a36;
+}
+
+.btn{
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.joinbtn{
+    background: #4aed88;
+}
+
+.joinbtn:hover{
+    background: #35b97d;
+}
+
+.createinfo{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    
+}
+
+.createnewbtn{
+    color: #4aed88;
+    transition: all 0.3s ease-in-out;
+}
+
+.createnewbtn:hover{
+    color: #35b97d;
+}
