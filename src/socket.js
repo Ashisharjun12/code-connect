@@ -8,5 +8,5 @@ export const initSocket = async () => {
     transports: ['websocket'],
   };
 
-  return io('https://linked-web-backend-u2iy.vercel.app', options);
+  return io('https://linked-web-backend.onrender.com/', options);
 };
