@@ -8,5 +8,5 @@ export const initSocket = async () => {
     transports: ['websocket'],
   };
 
-  return io('https://crop-ict-integral-emerald.trycloudflare.com', options);
+  return io('https://linked-web-backend-production.up.railway.app', options);
 };
