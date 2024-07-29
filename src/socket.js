@@ -8,5 +8,5 @@ export const initSocket = async () => {
     transports: ['websocket'],
   };
 
-  return io('https://geographical-bands-chan-tells.trycloudflare.com', options);
+  return io('https://linked-web-backend-u2iy.vercel.app', options);
 };
