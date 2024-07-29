@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build &&  node server.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server:dev": "nodemon server.js",
-    "server:prod": "node server.js",
-    "start":"npm run build && node server.js"
+    "server:prod": "node server.js"
+   
   },
   "dependencies": {
     "codemirror": "^6.0.1",
