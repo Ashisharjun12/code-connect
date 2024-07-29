@@ -8,5 +8,5 @@ export const initSocket = async () => {
     transports: ['websocket'],
   };
 
-  return io('https://linked-web-backend-production.up.railway.app', options);
+  return io('https://geographical-bands-chan-tells.trycloudflare.com', options);
 };
