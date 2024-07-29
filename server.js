@@ -1,23 +1,68 @@
-import express from "express"
-import http from "node:http"
-import { Server } from "socket.io"
-import { Socket } from "socket.io-client"
+import express from 'express';
+import http from 'node:http';
+import { Server } from 'socket.io';
+import { EVENTS } from './src/Events.js';
 
-const app = express()
+const app = express();
+const server = http.createServer(app);
 
-const server = http.createServer(app)
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+});
 
-const io = new Server(server)
+const port = 5000;
+const userSocketMap = {};
+const roomCodeMap = {}; // To keep track of the code for each room
 
-const port = 5000
+function getAllConnectedClients(roomId) {
+  return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map((socketId) => ({
+    socketId,
+    username: userSocketMap[socketId],
+  }));
+}
 
-io.on('connection',(Socket)=>{
-    console.log('socket connected', Socket.id)
-})
+io.on('connection', (socket) => {
+  console.log('Socket connected', socket.id);
 
-server.listen(port, ()=>{
-    console.log(`server is listening on ${port}`)
-})
+  socket.on(EVENTS.JOIN, ({ roomId, username }) => {
+    userSocketMap[socket.id] = username;
+    socket.join(roomId);
 
+    // Send the current code to the new user
+    const code = roomCodeMap[roomId] || '';
+    socket.emit(EVENTS.CODE_CHANGE, { code });
 
+    const clients = getAllConnectedClients(roomId);
+    clients.forEach(({ socketId }) => {
+      io.to(socketId).emit(EVENTS.JOINED, {
+        clients,
+        username,
+        socketId: socket.id,
+      });
+    });
+  });
 
+  // Handle code changes and synchronize with all clients
+  socket.on(EVENTS.CODE_CHANGE, ({ roomId, code }) => {
+    roomCodeMap[roomId] = code; // Update the code for the room
+    socket.in(roomId).emit(EVENTS.CODE_CHANGE, { code });
+  });
+
+  socket.on('disconnecting', () => {
+    const rooms = [...socket.rooms];
+    rooms.forEach((roomId) => {
+      socket.in(roomId).emit(EVENTS.DISCONNECTED, {
+        socketId: socket.id,
+        username: userSocketMap[socket.id],
+      });
+    });
+    delete userSocketMap[socket.id];
+  });
+});
+
+server.listen(port, () => {
+  console.log(`Server is listening on ${port}`);
+});
