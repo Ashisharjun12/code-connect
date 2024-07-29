@@ -2,9 +2,16 @@ import express from 'express';
 import http from 'node:http';
 import { Server } from 'socket.io';
 import { EVENTS } from './src/Events.js';
+import path from 'node:path';
 
 const app = express();
 const server = http.createServer(app);
+
+app.use(express.static('dist'))
+
+app.use((req,res,next)=>{
+  res.sendFile(path.join(__dirname, 'dist' ,'index.html'))
+})
 
 const io = new Server(server, {
   cors: {

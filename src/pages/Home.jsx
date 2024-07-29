@@ -47,7 +47,7 @@ const Home = () => {
   return (
     <div className='homePageWrapper'>
       <div className='formWrapper'>
-        {/* <img className='logo' src="/code-sync.png" alt="code-snippet"  /> */}
+        <img className='logo' src="/code-sync.png" alt="code-snippet"  />
         <h4 className='mainlavel'>Paste Invitation Room Id</h4>
         <div className='inputgroup'>
           <input type="text" className='inputbox' value={roomId} onChange={(e)=>{SetRoomId(e.target.value)}} placeholder='ROOM ID' onKeyUp={handelEnter}/>

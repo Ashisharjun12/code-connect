@@ -78,7 +78,7 @@ const Editor = () => {
       <div className='aside'>
         <div className='asideinner'>
           <div className='logo'>
-            {/* <img className='logoimg' src="/code-sync.png" alt="logo" /> */}
+            <img className='logoimg' src="/code-sync.png" alt="logo" />
           </div>
           <h3>Connected</h3>
           <div className='clientList'>
